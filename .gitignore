@@ -1,6 +1,14 @@
-# Gems
-*.gem
+# Tests
+coverage
 
-# RVM
+# OS X
+.DS_Store
+
+# Dev
 .rvmrc
+.ruby-version
+*.gem
+.bundle
 
+# Shouldn't be included in Gems
+Gemfile.lock
