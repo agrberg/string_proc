@@ -26,20 +26,26 @@ describe String do
     end
 
     it 'should turn all method names in the string to procs' do
-      mock_obj = mock(Object)
-      mock_obj.should_receive(:some_method)
-      'some_method'.to_proc.call(mock_obj)
+      double_obj = double(Object)
+      double_obj.should_receive(:some_method)
+      'some_method'.to_proc.call(double_obj)
     end
 
     it 'should return the results of all the procs' do
       proc = 'to_i.zero?'.to_proc
-      proc.call('5').should ==(false)
+      proc.call('5').should == false
     end
 
     it 'should be usable in a map as an & proc to see the objects' do
-      mock_1 = mock(:method => '5')
-      mock_2 = mock(:method => '1')
-      [mock_1, mock_2].map(&'method.to_f').should ==([5.0, 1.0])
+      double_1 = double(:method => '5')
+      double_2 = double(:method => '1')
+      [double_1, double_2].map(&'method.to_f').should == [5.0, 1.0]
+    end
+
+    it 'should function the same when the `proc_separator` is changed' do
+      String.proc_separator = '::'
+      double_obj = double(:method => '5')
+      'method::to_f'.to_proc.call(double_obj).should == 5.0
     end
   end
 end
