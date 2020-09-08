@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class String
   @@proc_separator ||= '.'
 
@@ -6,6 +8,8 @@ class String
   end
 
   def to_proc
-    proc {|object| split(@@proc_separator).inject(object) {|obj, cmd| obj.send(cmd) } }
+    proc do |object|
+      split(@@proc_separator).inject(object) { |obj, method| obj.send(method) }
+    end
   end
 end
