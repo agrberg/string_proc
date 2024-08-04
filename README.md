@@ -1,4 +1,4 @@
-`String#to_proc` [![Build Status](https://travis-ci.org/agrberg/string_proc.svg?branch=master)](https://travis-ci.org/agrberg/string_proc)
+`String#to_proc`
 ==============
 
 Overview
