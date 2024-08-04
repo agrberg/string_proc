@@ -1,37 +1,42 @@
 `String#to_proc`
 ==============
 
-Overview
---------
+`string_proc` extends Ruby's `String` class with a `to_proc` method, allowing you to chain multiple method calls on each element of an enumerable using the `&` shorthand syntax.
 
-`string_proc` adds the `to_proc` method to the Ruby String class. This turns a string of one or more method names into a proc to be called sequentially on an object.
+```ruby
+objects.map(&'method_1.method_2')
 
-Example usage: Passing a proc string into a `map` call to quickly see values or results of a sequence of methods like
+# is equivalent to the more verbose
 
-```
-my_array_of_objects.map(&'method_1.method_2')
-  # => [
-         object_1.method_1.method_2,
-         object_2.method_1.method_2,
-         ...
-       ]
+objects.map { |element| element.method_1.method_2 }
 ```
 
-Setup & Installation
---------------------
+### Example
 
-Include it in your project's `Gemfile`:
+Turning an array of symbols into capitalized strings:
 
-    gem 'string_proc'
-
-License
----------
-
-MIT: http://rem.mit-license.org
+```ruby
+[:one, :two].map(&'to_s.capitalize')
+  # => ["One", "Two"]
+```
 
 Errata
 ------
 
-This is one of the first small gems I published. I believe it contains useful functionality that I do not want to duplicate project to project.
+Similar to its counterpart, [`array_proc`](https://github.com/agrberg/array_proc), I recommend caution using this in production code. It's non-idiomatic Ruby and may cause more confusion than convenience. However, it can be a valuable tool for exploring and debugging objects in a REPL. For that reason, I often include it in my `Gemfile` with `require: false` ensuring that it won't be unintentionally used in code without explicitly requiring it via `require 'string_proc'`.
 
-I use this all the time while in `irb` or the Rails console as a nice way to dig into objects and their associated objects via method calls. Like it's cousin [`array_proc`](https://github.com/agrberg/array_proc) it is not intended for production code as it's non-idiomatic Ruby.
+This is one of the first small gems I published, as it provides functionality that I find useful across multiple projects. By packaging it as a gem, I can avoid duplicating the code and reduce the need for repetitive testing in each project.
+
+Installation
+--------------------
+
+Include it in your project's `Gemfile`:
+
+```ruby
+gem 'string_proc'
+```
+
+License
+---------
+
+MIT: https://mit-license.org/
