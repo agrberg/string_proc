@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    string_proc (1.0.3)
+    string_proc (1.0.4)
 
 GEM
   remote: https://rubygems.org/
