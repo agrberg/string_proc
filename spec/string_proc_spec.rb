@@ -1,54 +1,37 @@
+# frozen_string_literal: true
+
 require File.join(File.dirname(__FILE__), 'spec_helper')
 
 describe String do
-  describe 'Class' do
-    it 'has a class variable called @@proc_separator' do
-      expect(String.class_variables).to include(:@@proc_separator)
-    end
-
-    it 'is "." by default' do
-      expect(String.class_variable_get(:@@proc_separator)).to eq '.'
+  describe 'Class configuration' do
+    it 'adds a `proc_separator` to `String` defaulted to "."' do
+      expect(described_class.proc_separator).to eq '.'
     end
 
     it 'can change the proc_separator' do
-      String.proc_separator = '/'
-
-      expect(String.class_variable_get(:@@proc_separator)).to eq '/'
+      expect { described_class.proc_separator = '/' }.to change(described_class, :proc_separator).from('.').to('/')
     end
   end
 
   describe '#to_proc' do
-    before(:all) { String.proc_separator = '.' }
+    before { described_class.proc_separator = '.' } # `proc_separator` is changed in tests
 
-    it 'returns a proc when called on a string' do
+    it 'returns a proc' do
       expect(''.to_proc).to be_a(Proc)
     end
 
-    it 'turns all method names in the string to procs' do
-      double_obj = spy(Object)
-      'some_method'.to_proc.call(double_obj)
-
-      expect(double_obj).to have_received(:some_method)
+    it 'returns the result of chaining the methods on an object' do
+      expect('to_i.zero?'.to_proc.call('5')).to be false
     end
 
-    it 'returns the results of calling all the procs in order on their results' do
-      proc = 'to_i.zero?'.to_proc
-
-      expect(proc.call('5')).to eq false
+    it 'is intended for `&` shorthand to explore objects' do
+      expect(%i[one two].map(&'to_s.capitalize')).to eq %w[One Two]
     end
 
-    it 'is usable in a map as an `&`` proc to see the objects' do
-      double_1 = double(method: '5')
-      double_2 = double(method: '1')
+    it 'uses the overwritted `proc_separator` as expected' do
+      described_class.proc_separator = '::'
 
-      expect([double_1, double_2].map(&'method.to_f')).to eq [5.0, 1.0]
-    end
-
-    it 'functions the same when the `proc_separator` is not the default' do
-      String.proc_separator = '::'
-      double_obj = double(method: '5')
-
-      expect('method::to_f'.to_proc.call(double_obj)).to eq 5.0
+      expect(%w[5 10].map(&'to_i::even?')).to eq [false, true]
     end
   end
 end

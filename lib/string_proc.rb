@@ -1,15 +1,17 @@
 # frozen_string_literal: true
 
+# Adds `String#to_proc` to allow multiple method chain calls on each element of an enumerable using the `&` shorthand
+# The default separator is `.` but can be changed with the `String.proc_separator=` setter
 class String
-  @@proc_separator ||= '.'
+  @proc_separator = '.'
 
-  def self.proc_separator=(separator_string)
-    @@proc_separator = separator_string
+  class << self
+    attr_accessor :proc_separator
   end
 
   def to_proc
     proc do |object|
-      split(@@proc_separator).inject(object) { |obj, method| obj.send(method) }
+      split(self.class.proc_separator).reduce(object) { |obj, method| obj.send(method) }
     end
   end
 end
