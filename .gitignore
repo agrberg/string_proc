@@ -5,10 +5,4 @@ coverage
 .DS_Store
 
 # Dev
-.rvmrc
-.ruby-version
 *.gem
-.bundle
-
-# Shouldn't be included in Gems
-Gemfile.lock
