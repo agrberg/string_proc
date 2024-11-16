@@ -11,5 +11,5 @@ Gem::Specification.new do |s|
   s.homepage    = 'https://github.com/agrberg/string_proc'
   s.licenses    = 'MIT'
   s.metadata['rubygems_mfa_required'] = 'true'
-  s.required_ruby_version = '>= 2.0' # rubocop:disable Gemspec/RequiredRubyVersion — This should work on any version of Ruby
+  s.required_ruby_version = '>= 2.0'
 end
