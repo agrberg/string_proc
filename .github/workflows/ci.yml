@@ -14,7 +14,7 @@ jobs:
       - name: Install Ruby
         uses: ruby/setup-ruby@v1
         with:
-          ruby-version: .ruby-version
+          ruby-version: .tool-versions
           bundler-cache: true
       - name: Lint code for consistent style
         run: bundle exec rubocop -f github

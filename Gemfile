@@ -2,7 +2,7 @@
 
 source 'https://rubygems.org'
 
-ruby file: '.ruby-version'
+ruby file: '.tool-versions'
 
 group :development, :test do
   gem 'rake'
