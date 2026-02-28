@@ -2,6 +2,7 @@
 ==============
 
 [![CI](https://github.com/agrberg/string_proc/actions/workflows/ci.yml/badge.svg)](https://github.com/agrberg/string_proc/actions/workflows/ci.yml)
+[![Gem Version](https://badge.fury.io/rb/string_proc.svg)](https://rubygems.org/gems/string_proc)
 
 `string_proc` extends Ruby's `String` class with a `to_proc` method, allowing you to chain multiple method calls on each element of an enumerable using the `&` shorthand syntax.
 
