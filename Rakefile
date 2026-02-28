@@ -14,7 +14,7 @@ end
 
 RuboCop::RakeTask.new
 
-desc 'Generage code coverage with simplecov'
+desc 'Generate code coverage with simplecov'
 task :coverage do
   `COVERAGE=true rspec`
   `open coverage/index.html`

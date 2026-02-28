@@ -9,7 +9,9 @@ Gem::Specification.new do |s|
   s.email       = 'aarongrosenberg@gmail.com'
   s.files       = ['lib/string_proc.rb']
   s.homepage    = 'https://github.com/agrberg/string_proc'
-  s.licenses    = 'MIT'
+  s.licenses    = ['MIT']
   s.metadata['rubygems_mfa_required'] = 'true'
+  s.metadata['source_code_uri'] = 'https://github.com/agrberg/string_proc'
+  s.metadata['bug_tracker_uri'] = 'https://github.com/agrberg/string_proc/issues'
   s.required_ruby_version = '>= 3.3'
 end
