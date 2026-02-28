@@ -11,7 +11,7 @@ class String
 
   def to_proc
     proc do |object|
-      split(self.class.proc_separator).reduce(object) { |obj, method| obj.send(method) }
+      split(self.class.proc_separator).reduce(object) { |obj, method| obj.public_send(method) }
     end
   end
 end
