@@ -13,5 +13,6 @@ Gem::Specification.new do |s|
   s.metadata['rubygems_mfa_required'] = 'true'
   s.metadata['source_code_uri'] = 'https://github.com/agrberg/string_proc'
   s.metadata['bug_tracker_uri'] = 'https://github.com/agrberg/string_proc/issues'
+
   s.required_ruby_version = '>= 3.3'
 end
